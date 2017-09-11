@@ -1,0 +1,52 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+android {
+    compileSdkVersion rootProject.ext.android.compileSdkVersion
+    buildToolsVersion rootProject.ext.android.buildToolsVersion
+    defaultConfig {
+        applicationId rootProject.ext.android.applicationId
+        minSdkVersion rootProject.ext.android.minSdkVersion
+        targetSdkVersion rootProject.ext.android.targetSdkVersion
+        versionCode rootProject.ext.android.versionCode
+        versionName rootProject.ext.android.versionName
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    sourceSets {
+        main {
+            java.srcDirs = ['src/main/java']
+            assets.srcDirs = ['src/main/assets']
+        }
+    }
+
+    dexOptions {
+        javaMaxHeapSize "8g"
+    }
+}
+
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+
+    compile rootProject.ext.dependencies.appcompat_v7
+    compile rootProject.ext.dependencies.rxjava2_rxandroid
+    compile rootProject.ext.dependencies.rxjava2_rxjava
+    compile rootProject.ext.dependencies.okhttp3_okhttp
+    compile rootProject.ext.dependencies.okhttp3_logging_interceptor
+    compile rootProject.ext.dependencies.okio_okio
+    compile rootProject.ext.dependencies.retrofit2_retrofit
+    compile rootProject.ext.dependencies.retrofit2_converter_gson
+    compile rootProject.ext.dependencies.retrofit2_adapter_rxjava
+    compile rootProject.ext.dependencies.gson
+    compile rootProject.ext.dependencies.fresco_fresco
+    compile rootProject.ext.dependencies.fresco_animated_gif
+}
+repositories {
+    mavenCentral()
+}
